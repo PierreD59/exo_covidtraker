@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CovidTraker!{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <h1>Covid Tracker</h1>
+    <hr>
+
+        <div class="col-md-12">
+            <h2 class="mt-5">Donnée connue à l'heure actuelle</h2>
+            <hr>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Date actuelle</th>
+                    <th scope="col">Nombre de cas confirmés</th>
+                    <th scope="col">Nombre de Mort totals</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">{{ dateActually.date }}</th>
+                    <td>{{ dateActually.conf }}</td>
+                    <td>{{ dateActually.dc_tot }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="col-md-12">
+            <h2 class="mt-5">Donnée connue selon une date précise </h2>
+            <hr>
+            <form method="post">
+                <input name="date" type="date" id="date">
+                <input name="submit" type="submit">
+            </form>
+            {% if date is defined %}
+                {% for toto in date %}
+                    <div class="card col-md-3 m-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ toto.date }}</h3>
+                            <hr>
+                            <p class="card-text">Nombre de patients actuellement hospitalisés pour COVID-19 : {{ toto.hosp }}</p>
+                            <p class="card-text">Nombre de décès à l’hôpital : {{ toto.dc_tot }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+
+        <div class="col-md-12">
+            <h2 class="mt-5">Donnée connue par département</h2>
+            <hr>
+            <div class="row m-0 p-0">
+                {% for departments in allDepartment %}
+                    <div class="card col-md-3 m-3" style="width: 18rem;">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ departments.lib_dep }}</h3>
+                            <hr>
+                            <p class="card-text">Nombre de patients actuellement hospitalisés pour COVID-19 : {{ departments.hosp }}</p>
+                            <p class="card-text">Nombre de décès à l’hôpital : {{ departments.dchosp }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+    </div>
+
+
+</div>
+{% endblock %}
