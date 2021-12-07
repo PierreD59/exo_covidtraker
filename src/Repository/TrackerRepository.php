@@ -58,24 +58,6 @@ class TrackerRepository
      * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
      */
-    public function findByDateByDepartment($date): array
-    {
-        $response = $this->client->request(
-            'GET',
-            'https://coronavirusapifr.herokuapp.com/data/departements-by-date/' . $date
-        );
-        $content = $response->getContent();
-        $content = $response->toArray();
-        return $content['results'];
-    }
-
-    /**
-     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
-     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
-     */
     public function findByDate($date): array
     {
         $response = $this->client->request(
@@ -87,6 +69,24 @@ class TrackerRepository
         return $content;
     }
 
+    /**
+     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
+     */
+    public function showAllDetailByDepartement($department): array
+    {
+        $response = $this->client->request(
+            'GET',
+            'https://coronavirusapifr.herokuapp.com/data/live/departement/' . $department
+        );
+        $content = $response->getContent();
+        $content = $response->toArray();
+        return $content['0'];
+    }
+
 //    /**
 //     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
 //     * @throws \Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
@@ -94,11 +94,11 @@ class TrackerRepository
 //     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
 //     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
 //     */
-//    public function findDepartmentById($department): array
+//    public function findByDateByDepartment($date): array
 //    {
 //        $response = $this->client->request(
-//            'get',
-//            'https://coronavirusapifr.herokuapp.com/data/departements-by-date/' . $department
+//            'GET',
+//            'https://coronavirusapifr.herokuapp.com/data/departements-by-date/' . $date
 //        );
 //        $content = $response->getContent();
 //        $content = $response->toArray();

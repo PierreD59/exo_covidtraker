@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DetailController!{% endblock %}
+
+{% block body %}
+    <h1>{{ department.lib_dep }} - {{ department.lib_reg }}</h1>
+
+<p>Numéro du Département : {{ department.dep }}</p>
+<p>Date Actuelle : {{ department.date }}</p>
+<p>Numéro de la Région : {{ department.reg }}</p>
+<p>Taux d'occupation : {{ department.TO }}</p>
+<p>Nombre de patients actuellement hospitalisés : {{ department.hosp }}</p>
+<p>Nombre de patients actuellement en réanimation : {{ department.rea }}</p>
+<p>Nombre de décès à l'hôpital : {{ department.dchosp }}</p>
+
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+
+
+{% endblock %}

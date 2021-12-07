@@ -56,14 +56,17 @@
             <hr>
             <div class="row m-0 p-0">
                 {% for departments in allDepartment %}
-                    <div class="card col-md-3 m-3" style="width: 18rem;">
-                        <div class="card-body">
-                            <h3 class="card-title">{{ departments.lib_dep }}</h3>
-                            <hr>
-                            <p class="card-text">Nombre de patients actuellement hospitalisés pour COVID-19 : {{ departments.hosp }}</p>
-                            <p class="card-text">Nombre de décès à l’hôpital : {{ departments.dchosp }}</p>
+                        <div class="card col-md-3 m-3" style="width: 18rem;">
+                            <a href="{{ path('detail', {department: departments.lib_dep }) }}">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{ departments.lib_dep }}</h3>
+                                    <hr>
+                                    <p class="card-text">Nombre de patients actuellement hospitalisés pour COVID-19 : {{ departments.hosp }}</p>
+                                    <p class="card-text">Nombre de décès à l’hôpital : {{ departments.dchosp }}</p>
+                                </div>
+                            </a>
                         </div>
-                    </div>
+
                 {% endfor %}
             </div>
     </div>

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="main")
+     * @Route("/", name="index")
      * @param TrackerRepository $trackerRepository
      * @return Response
      */
@@ -31,5 +31,17 @@ class MainController extends AbstractController
                     'allDepartment' => $trackerRepository->findAllDepartments(),
                     ]);
             }
+    }
+
+    /**
+     * @Route("/detail/{department}", name="detail")
+     * @param TrackerRepository $trackerRepository
+     * @return Response
+     */
+    public function detail(TrackerRepository $trackerRepository, Request $request, $department): Response
+    {
+        return $this->render('detail/index.html.twig', [
+            'department' => $trackerRepository->showAllDetailByDepartement($department),
+        ]);
     }
 }
