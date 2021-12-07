@@ -1,21 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DetailController!{% endblock %}
+{% block title %}{{ department.lib_dep }} - Covid Tracker{% endblock %}
 
 {% block body %}
+<div class="container my-5">
     <h1>{{ department.lib_dep }} - {{ department.lib_reg }}</h1>
+    <hr class="ligne">
+    <div class="row mx-0 my-5 p-0">
 
-<p>Numéro du Département : {{ department.dep }}</p>
-<p>Date Actuelle : {{ department.date }}</p>
-<p>Numéro de la Région : {{ department.reg }}</p>
-<p>Taux d'occupation : {{ department.TO }}</p>
-<p>Nombre de patients actuellement hospitalisés : {{ department.hosp }}</p>
-<p>Nombre de patients actuellement en réanimation : {{ department.rea }}</p>
-<p>Nombre de décès à l'hôpital : {{ department.dchosp }}</p>
 
-<div>
-    <canvas id="myChart"></canvas>
+        <div class="col-md-6">
+            <p>Date Actuelle : {{ department.date }}</p>
+            <p>Taux d'occupation : tension hospitalière sur la capacité en réanimation : {{ department.TO }} %</p>
+        </div>
+
+        <div class="col-md-6">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+    </div>
 </div>
 
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        ctx.width = 400;
+        ctx.height = 400;
+
+        const myChart = new Chart(ctx,
+            {
+                type: 'pie',
+                data: {
+                    labels: [
+                        'Nombre de patients hospitalisés',
+                        'Nombre de patients en réanimation',
+                        'Nombre de décès à l\'hôpital'
+                    ],
+                    datasets: [{
+                        label: 'My First Dataset',
+                        data: [{{ department.hosp }}, {{ department.rea }}, {{ department.dchosp }}],
+                        backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)'
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                }
+            });
+    </script>
 
 {% endblock %}

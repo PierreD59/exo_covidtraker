@@ -38,7 +38,7 @@ class MainController extends AbstractController
      * @param TrackerRepository $trackerRepository
      * @return Response
      */
-    public function detail(TrackerRepository $trackerRepository, Request $request, $department): Response
+    public function detail(TrackerRepository $trackerRepository, $department): Response
     {
         return $this->render('detail/index.html.twig', [
             'department' => $trackerRepository->showAllDetailByDepartement($department),

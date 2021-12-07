@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}CovidTraker!{% endblock %}
+{% block title %}Accueil - CovidTraker!{% endblock %}
 
 {% block body %}
 <div class="container my-5">
-    <h1>Covid Tracker</h1>
-    <hr>
+    <h1 class="text-center">Bienvenue sur Covid Tracker</h1>
+    <hr class="ligne_h1">
 
         <div class="col-md-12">
             <h2 class="mt-5">Donnée connue à l'heure actuelle</h2>
-            <hr>
-            <table class="table">
+            <hr class="ligne">
+            <table class="table table-dark table-striped">
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">Date actuelle</th>
@@ -29,38 +29,50 @@
         </div>
 
 
-        <div class="col-md-12">
-            <h2 class="mt-5">Donnée connue selon une date précise </h2>
-            <hr>
-            <form method="post">
-                <input name="date" type="date" id="date">
-                <input name="submit" type="submit">
-            </form>
-            {% if date is defined %}
-                {% for toto in date %}
-                    <div class="card col-md-3 m-3" style="width: 18rem;">
-                        <div class="card-body">
-                            <h3 class="card-title">{{ toto.date }}</h3>
-                            <hr>
-                            <p class="card-text">Nombre de patients actuellement hospitalisés pour COVID-19 : {{ toto.hosp }}</p>
-                            <p class="card-text">Nombre de décès à l’hôpital : {{ toto.dc_tot }}</p>
-                        </div>
+        <div  class="mt-5 col-md-12">
+            <div class="row m-0 p-0">
+                <div class="col-md-6">
+                    <h2>Donnée connue selon <br>une date précise </h2>
+                    <hr class="ligne">
+                    <div class="col-md-3">
+                        <form method="post">
+                            <div class="form-group mb-3">
+                                <input class="form-control" name="date" type="date" id="date">
+                            </div>
+                            <div>
+                                <input class="btn btn-primary" name="submit" type="submit">
+                            </div>
+                        </form>
                     </div>
-                {% endfor %}
-            {% endif %}
+                </div>
+                {% if date is defined %}
+                    {% for toto in date %}
+                        <div class="col-md-6">
+                            <div class="card col-md-3" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{ toto.date }}</h3>
+                                    <hr>
+                                    <p class="card-text">Nombre de patients actuellement hospitalisés pour COVID-19 : {{ toto.hosp }}</p>
+                                    <p class="card-text">Nombre de décès à l’hôpital : {{ toto.dc_tot }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
         </div>
 
 
         <div class="col-md-12">
             <h2 class="mt-5">Donnée connue par département</h2>
-            <hr>
+            <hr class="ligne">
             <div class="row m-0 p-0">
                 {% for departments in allDepartment %}
                         <div class="card col-md-3 m-3" style="width: 18rem;">
-                            <a href="{{ path('detail', {department: departments.lib_dep }) }}">
+                            <a class="cardBlock" href="{{ path('detail', {department: departments.lib_dep }) }}">
                                 <div class="card-body">
                                     <h3 class="card-title">{{ departments.lib_dep }}</h3>
-                                    <hr>
+                                    <hr class="ligne">
                                     <p class="card-text">Nombre de patients actuellement hospitalisés pour COVID-19 : {{ departments.hosp }}</p>
                                     <p class="card-text">Nombre de décès à l’hôpital : {{ departments.dchosp }}</p>
                                 </div>
