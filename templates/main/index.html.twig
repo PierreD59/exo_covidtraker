@@ -39,7 +39,7 @@
                             <div class="form-group mb-3">
                                 <input class="form-control" name="date" type="date" id="date">
                             </div>
-                            <div>
+                            <div class="form-group mb-3">
                                 <input class="btn btn-primary" name="submit" type="submit">
                             </div>
                         </form>
@@ -62,13 +62,12 @@
             </div>
         </div>
 
-
         <div class="col-md-12">
             <h2 class="mt-5">Donnée connue par département</h2>
             <hr class="ligne">
             <div class="row m-0 p-0">
                 {% for departments in allDepartment %}
-                        <div class="card col-md-3 m-3" style="width: 18rem;">
+                        <div class="card col-md-2 m-3" style="width: 18rem;">
                             <a class="cardBlock" href="{{ path('detail', {department: departments.lib_dep }) }}">
                                 <div class="card-body">
                                     <h3 class="card-title">{{ departments.lib_dep }}</h3>
@@ -82,7 +81,6 @@
                 {% endfor %}
             </div>
     </div>
-
-
 </div>
+
 {% endblock %}

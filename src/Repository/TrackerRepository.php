@@ -94,15 +94,15 @@ class TrackerRepository
 //     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
 //     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
 //     */
-//    public function findByDateByDepartment($date): array
+//    public function findByRegion($region): array
 //    {
 //        $response = $this->client->request(
 //            'GET',
-//            'https://coronavirusapifr.herokuapp.com/data/departements-by-date/' . $date
+//            'https://coronavirusapifr.herokuapp.com/data/live/region/' . $region
 //        );
 //        $content = $response->getContent();
 //        $content = $response->toArray();
-//        return $content['results'];
+//        return $content['0'];
 //    }
 
 

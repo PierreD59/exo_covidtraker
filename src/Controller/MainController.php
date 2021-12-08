@@ -24,12 +24,13 @@ class MainController extends AbstractController
                     'dateActually' => $trackerRepository->findByActuallyDate(),
                     'allDepartment' => $trackerRepository->findAllDepartments(),
                     'date' => $trackerRepository->findByDate($this->date),
+
                 ]);
             } else {
                 return $this->render('main/index.html.twig', [
                     'dateActually' => $trackerRepository->findByActuallyDate(),
                     'allDepartment' => $trackerRepository->findAllDepartments(),
-                    ]);
+                ]);
             }
     }
 
@@ -43,5 +44,28 @@ class MainController extends AbstractController
         return $this->render('detail/index.html.twig', [
             'department' => $trackerRepository->showAllDetailByDepartement($department),
         ]);
+    }
+
+    /**
+     * @Route("/department", name="department")
+     * @param TrackerRepository $trackerRepository
+     * @return Response
+     */
+    public function statDepartment(TrackerRepository $trackerRepository, Request $request)
+    {
+        $allDepartment = $trackerRepository->findAllDepartments();
+        $dc = [];
+        $sdep = [];
+        foreach ($allDepartment as $department) {
+            $dc[] = $department['dchosp'];
+            $sdep[] = $department['lib_dep'];
+        }
+        dump($dc);
+            return $this->render('department/index.html.twig', [
+                'nameDepartment' => json_encode($sdep),
+                'death' => json_encode($dc),
+
+
+            ]);
     }
 }
